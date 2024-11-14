@@ -1,9 +1,9 @@
 {
   "name": "microservice-app-library",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
+  "description": "microservice hotel library",
+  "author": "Collins Ihezie",
+  "private": false,
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
