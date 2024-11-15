@@ -1,5 +1,5 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
-import { AppHelper } from "../helpers/helper";
+import { AppHelper } from "../helpers/app.helper";
 import { AppJwtService } from "../services/jwt.service";
 import { UserType } from "../types/user.type";
 

@@ -1,7 +1,7 @@
 import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { AUTH_SERVICE, AUTHENTICATE_ROUTE } from "../constants/services";
 import { ClientProxy } from "@nestjs/microservices";
-import { AppHelper } from "../helpers/helper";
+import { AppHelper } from "../helpers/app.helper";
 import { Observable, tap, map, catchError, of } from "rxjs";
 import { UserType } from "../types/user.type";
 
