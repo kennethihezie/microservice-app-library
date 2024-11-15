@@ -1,37 +1,24 @@
-import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
-import { AUTH_SERVICE, AUTHENTICATE_ROUTE } from "../constants/services";
-import { ClientProxy } from "@nestjs/microservices";
+import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from "@nestjs/common";
 import { AppHelper } from "../helpers/helper";
-import { Observable, tap, map, catchError, of } from "rxjs";
+import { AppJwtService } from "../services/jwt.service";
 import { UserType } from "../types/user.type";
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
-  /* The ClientProxy allows us to communicate with other microservices */
-  constructor(@Inject(AUTH_SERVICE) private readonly client: ClientProxy) {}
+    constructor(private readonly appJwtService: AppJwtService) {}
 
+    async canActivate(context: ExecutionContext): Promise<boolean> {
+        const request = context.switchToHttp().getRequest()
+        const token = AppHelper.extractTokenFromHeader(request);
 
-  canActivate(context: ExecutionContext): boolean | Observable<boolean> {
-    const request = context.switchToHttp().getRequest();
-    const token = AppHelper.extractTokenFromHeader(request);
-    if (!token) {
-      return false;
+        if (!token) throw new UnauthorizedException('Token is required')
+
+        const payload = await this.appJwtService.verifyJwtToken<UserType>(token)
+
+        if(!payload) throw new UnauthorizedException('Invalid or malformed token')
+
+        request.user = payload
+
+        return true
     }
-
-    return this.client.send<UserType>(AUTHENTICATE_ROUTE, { token }).pipe(
-      // Tap allows performing side-effects without altering the emitted data.
-      tap((user: UserType) => {
-        request.user = user;
-      }),
-      
-      // Map to true to indicate successful authentication if the user is retrieved
-      map((user: UserType) => !!user),
-
-      // Catch errors if needed
-      catchError((err) => {
-          console.error('Error during authentication:', err);
-          return of(false); // Return false in case of an error
-      })
-  );
-  }
 }

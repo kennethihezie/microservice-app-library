@@ -17,10 +17,16 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "moduleResolution": "node",
+    "strict": true,
     "paths": {
       "@app/common": [
         "libs/common/src"
       ]
     }
-  }
+  },
+  // "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
