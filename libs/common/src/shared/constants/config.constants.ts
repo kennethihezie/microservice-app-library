@@ -1,0 +1,6 @@
+export class ConfigConstants {
+    static JWT_SECRET='JWT_SECRET'
+    static JWT_EXPIRY='JWT_EXPIRY'
+    static JWT_REFRESH_SECRET='JWT_REFRESH_SECRET'
+    static JWT_REFRESH_EXPIRES='JWT_REFRESH_EXPIRES'
+}

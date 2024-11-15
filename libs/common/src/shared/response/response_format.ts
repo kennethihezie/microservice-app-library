@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 import { RESPONSE_MESSAGE } from '../decorators/response_message.decorator';
 import { ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { AppCodes } from '../constants/app_code';
+import { AppCodes } from '../constants/app_code.constants';
 
 /*
  The ResponseFormat class is used to handle 
