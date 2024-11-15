@@ -1,10 +1,10 @@
 {
   "name": "microservice-app-library",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "microservice hotel library",
   "author": "Collins Ihezie",
   "private": false,
-  "license": "UNLICENSED",
+  "license": "MIT licensed",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\" \"libs/**/*.ts\"",
